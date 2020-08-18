@@ -27,7 +27,7 @@ class MainForm extends React.Component {
             mobile: '',
             country: '',
             city: '',
-            avatar: '/avatar.png',
+            avatar: 'avatar.png',
             errors: {}
         }
     }
