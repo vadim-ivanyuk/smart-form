@@ -1,0 +1,161 @@
+html {
+  overflow: hidden;
+}
+
+.cent-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.form-default {
+  width: 500px;
+  padding: 30px 80px 0px 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+.invalid-proparty {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.steps-block {
+  width: 100%;
+  height: auto;
+  min-height: 50px;
+  background: steelblue;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 1px 1px 5px grey;
+}
+
+.steps-block-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 10px;
+}
+
+.step {
+  box-shadow: 1px 1px 10px;
+}
+
+.step>div {
+  box-shadow: 1px 1px 10px;
+}
+
+.steps-block-item>div {
+  margin-bottom: 0px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  margin: 20px 0px 5px 0px;
+  border-radius: 100%;
+  color: white;
+  border: 1px solid whitesmoke;
+}
+
+.steps-block-item>p {
+  color: whitesmoke;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.form-label-title {
+  font-size: 17px;
+}
+
+.btn-default {
+  width: 120px;
+  margin: 10px 0px;
+  background: rgb(230, 228, 228) !important;
+}
+
+.btn-default:hover {
+  background: rgb(175, 173, 173) !important;
+}
+
+.btn-default[disabled]:hover {
+  background: rgb(230, 228, 228) !important;
+}
+
+.button-steps {
+  justify-content: space-evenly;
+}
+
+.void-block {
+  height: 20px;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+  margin-bottom: 20px;
+}
+
+.avatar-title-block {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.avatar-title-block input[type='file'] {
+  width: 270px;
+}
+
+.avatar-title-block>label {
+  margin-right: 10px;
+}
+
+.main-finish-block {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.main-finish-block--img {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.main-finish-block--titleP {
+  font-size: 21px !important;
+  margin-left: 10px !important;
+  margin-top: 15px;
+  text-decoration: underline;
+}
+
+.main-finish-block p {
+  margin-left: 25px;
+  font-size: 18px;
+  color: black
+}
+
+.main-finish-block p a {
+  color: inherit;
+}
+
+.icon {
+  font-size: 22px;
+  margin-right: 3px;
+  padding-top: 2px;
+  width: 22px !important;
+}
+
+.error {
+  border-color: red !important;
+}
