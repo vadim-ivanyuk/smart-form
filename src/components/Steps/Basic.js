@@ -1,5 +1,5 @@
 import React from 'react'
-import Field from './Fields/Field'
+import Field from '../Fields/Field'
 
 class Basic extends React.Component {
     constructor() {
@@ -8,8 +8,8 @@ class Basic extends React.Component {
     }
 
     render() {
-        const {firstName, secondName, password, repeatPassword, gender, onChange, errors} = this.props
-        console.log(errors);
+        const { firstName, secondName, password, repeatPassword, gender } = this.props.values
+        const { onChange, errors } = this.props
         return (
             <React.StrictMode>
                 <Field

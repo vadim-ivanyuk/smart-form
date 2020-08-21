@@ -1,10 +1,10 @@
 import React from 'react';
-import StepsBlock from '../components/Steps'
-import Basic from '../components/Basic'
-import Contacts from '../components/Contacts'
-import Avatar from '../components/Avatar'
-import Finish from '../components/Finish'
-import StepsButton from '../components/StepsButton'
+import StepsBlock from './StepsHeader/StepsHeader'
+import Basic from './Steps/Basic'
+import Contacts from './Steps/Contacts'
+import Avatar from './Steps/Avatar'
+import Finish from './Steps/Finish'
+import StepsButton from './StepsButton/StepsButton'
 import styled, { keyframes } from 'styled-components'
 import { bounceInDown, bounceInUp, zoomIn } from 'react-animations'
 
@@ -17,31 +17,35 @@ class MainForm extends React.Component {
         super()
 
         this.state = {
-            firstName: '',
-            secondName: '',
-            password: '',
-            repeatPassword: '',
-            gender: 'male',
+            values: {
+                firstName: '',
+                secondName: '',
+                password: '',
+                repeatPassword: '',
+                gender: 'male',
+                email: '',
+                mobile: '',
+                country: '1',
+                city: '',
+                avatar: 'avatar.png',
+            },
+            errors: {},
             step: 1,
-            email: '',
-            mobile: '',
-            country: '',
-            city: '',
-            avatar: 'avatar.png',
-            errors: {}
         }
     }
 
     onChange = e => {
+        this.state.values[e.target.name] = e.target.value
         this.setState({
-            [e.target.name]: e.target.value
+            values: this.state.values
         })
     }
 
     onChangeAvatar = e => {
         const reader = new FileReader()
         reader.onload = (e) => {
-            this.setState({ avatar: e.target.result })
+            this.state.values.avatar = e.target.result
+            this.setState({ values: this.state.values })
         }
 
         reader.readAsDataURL(e.target.files[0])
@@ -49,17 +53,19 @@ class MainForm extends React.Component {
 
     resetForm = (e) => {
         this.setState({
+            values: {
+                firstName: '',
+                secondName: '',
+                password: '',
+                repeatPassword: '',
+                gender: 'male',
+                email: '',
+                mobile: '',
+                country: '1',
+                city: '',
+                avatar: 'avatar.png',
+            },
             step: 1,
-            firstName: "",
-            secondName: "",
-            password: "",
-            repeatPassword: "",
-            gender: "male",
-            email: "",
-            mobile: "",
-            country: "",
-            city: "",
-            avatar: '/avatar.png',
             errors: {
                 firstName: "",
                 secondName: "",
@@ -79,7 +85,6 @@ class MainForm extends React.Component {
 
     checkErrors = e => {
         const {
-            step,
             firstName,
             secondName,
             password,
@@ -89,7 +94,9 @@ class MainForm extends React.Component {
             country,
             avatar,
             city
-        } = this.state
+        } = this.state.values
+
+        const { step } = this.state
 
         const errors = {}
 
@@ -178,11 +185,7 @@ class MainForm extends React.Component {
                     {this.state.step === 1 ? (
                         <ZoomIn>
                             <Basic
-                                firstName={this.state.firstName}
-                                secondName={this.state.secondName}
-                                password={this.state.password}
-                                repeatPassword={this.state.repeatPassword}
-                                gender={this.state.gender}
+                                values={this.state.values}
                                 onChange={this.onChange}
                                 errors={this.state.errors}
                             />
@@ -191,10 +194,7 @@ class MainForm extends React.Component {
                     {this.state.step === 2 ? (
                         <ZoomIn>
                             <Contacts
-                                email={this.state.email}
-                                mobile={this.state.mobile}
-                                country={this.state.country}
-                                city={this.state.city}
+                                values={this.state.values}
                                 onChange={this.onChange}
                                 errors={this.state.errors}
                             />
@@ -205,7 +205,7 @@ class MainForm extends React.Component {
                             <Avatar
                                 title='Avatar: '
                                 id='avatar'
-                                value={this.state.avatar}
+                                value={this.state.values.avatar}
                                 name='avatar'
                                 onChange={this.onChangeAvatar}
                                 errors={this.state.errors}
@@ -216,13 +216,7 @@ class MainForm extends React.Component {
                 {this.state.step === 4 ? (
                     <ZoomIn>
                         <Finish
-                            avatar={this.state.avatar}
-                            firstName={this.state.firstName}
-                            secondName={this.state.secondName}
-                            mobile={this.state.mobile}
-                            email={this.state.email}
-                            country={this.state.country}
-                            city={this.state.city}
+                            values={this.state.values}
                         />
                     </ZoomIn>
                 ) : null}

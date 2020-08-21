@@ -1,5 +1,5 @@
 import React from 'react'
-import Field from './Fields/Field'
+import Field from '../Fields/Field'
 
 const Avatar = (props) => {
     const { title, id, name, onChange, value, errors } = props

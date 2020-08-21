@@ -1,9 +1,5 @@
 const countries = [
     {
-        id: 0,
-        name: 'Select country'
-    },
-    {
         id: 1,
         name: 'Ukraine'
     },

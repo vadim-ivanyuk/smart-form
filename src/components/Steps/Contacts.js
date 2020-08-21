@@ -1,8 +1,8 @@
 import React from 'react'
-import Field from './Fields/Field'
-import SelectField from './Fields/SelectField'
-import countries from '../data/countries'
-import cities from '../data/cities'
+import Field from '../Fields/Field'
+import SelectField from '../Fields/SelectField'
+import countries from '../../data/countries'
+import cities from '../../data/cities'
 
 class Contacts extends React.Component {
     constructor() {
@@ -10,27 +10,25 @@ class Contacts extends React.Component {
         this.state = {}
     }
 
-    getOptionsItems = (items) => {
-        return items.map((item) => {
-            return <option key={item.id} value={item.id}>{item.name}</option>
+    getCountiesOptions = (countries) => {
+        return countries.map((item, index) => {
+            return <option key={index} value={item.id}>{item.name}</option>
         })
     }
 
     getCitiesOptions = (cities) => {
-        const filteredCities = Object.entries(cities).filter(
-            el => el[1].country === Number(this.props.country)
-        );
-        return this.getOptionsItems(
-            filteredCities.map(([id, city]) => ({
-                id,
-                name: city.name
-            }))
-        );
+        const resultCities = cities.filter((item, index) => {
+            return item.id == this.props.values.country
+        })
+        return resultCities.map((item, index) => {
+            return <option key={index} value={item.name}>{item.name}</option>
+        })
     }
 
     render() {
 
-        const { email, mobile, onChange, errors, country, city } = this.props
+        const { email, mobile, country, city } = this.props.values
+        const { onChange, errors, } = this.props
 
         return (
             <React.StrictMode>
@@ -60,7 +58,7 @@ class Contacts extends React.Component {
                     value={country}
                     name='country'
                     onChange={onChange}
-                    options={this.getOptionsItems(countries)}
+                    options={this.getCountiesOptions(countries)}
                     error={errors.country}
                 />
                 <SelectField
