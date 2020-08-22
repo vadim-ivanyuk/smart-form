@@ -5,7 +5,8 @@ import countries from '../../data/countries'
 
 const Finish = (props) => {
     const { avatar, firstName, secondName, mobile, country, email, city } = props.values
-    const resultCountry = countries.find(item => item.id === +country)
+    const resultCountry = countries.find(item => item.id === +country) || {}
+    
     return (
         <div className='main-finish-block'>
             <div>

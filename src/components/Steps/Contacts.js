@@ -4,25 +4,23 @@ import SelectField from '../Fields/SelectField'
 import countries from '../../data/countries'
 import cities from '../../data/cities'
 
-class Contacts extends React.Component {
+export default class Contacts extends React.Component {
     constructor() {
         super()
         this.state = {}
     }
 
-    getCountiesOptions = (countries) => {
-        return countries.map((item, index) => {
+    getOptions = (items) => {
+        return items.map((item, index) => {
             return <option key={index} value={item.id}>{item.name}</option>
         })
     }
 
     getCitiesOptions = (cities) => {
-        const resultCities = cities.filter((item, index) => {
-            return item.id == this.props.values.country
-        })
-        return resultCities.map((item, index) => {
-            return <option key={index} value={item.name}>{item.name}</option>
-        })
+        return (
+            cities.filter((item, index) => item.id == this.props.values.country)
+                .map((item, index) => <option key={index} value={item.name}>{item.name}</option>)
+        )
     }
 
     render() {
@@ -58,7 +56,7 @@ class Contacts extends React.Component {
                     value={country}
                     name='country'
                     onChange={onChange}
-                    options={this.getCountiesOptions(countries)}
+                    options={this.getOptions(countries)}
                     error={errors.country}
                 />
                 <SelectField
@@ -75,5 +73,3 @@ class Contacts extends React.Component {
         )
     }
 }
-
-export default Contacts

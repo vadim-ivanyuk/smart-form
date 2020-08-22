@@ -12,6 +12,12 @@ const BounceInDown = styled.div`animation: 1s ${keyframes`${bounceInDown}`}`
 const BounceInUp = styled.div`animation: 1s ${keyframes`${bounceInUp}`}`
 const ZoomIn = styled.div`animation: 0.5s ${keyframes`${zoomIn}`}`
 
+const emailRegex = new RegExp(
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+);
+
+const mobileRegex = new RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/gm);
+
 class MainForm extends React.Component {
     constructor() {
         super()
@@ -41,16 +47,6 @@ class MainForm extends React.Component {
         })
     }
 
-    onChangeAvatar = e => {
-        const reader = new FileReader()
-        reader.onload = (e) => {
-            this.state.values.avatar = e.target.result
-            this.setState({ values: this.state.values })
-        }
-
-        reader.readAsDataURL(e.target.files[0])
-    }
-
     resetForm = (e) => {
         this.setState({
             values: {
@@ -77,10 +73,6 @@ class MainForm extends React.Component {
                 location: ""
             }
         });
-    }
-
-    onSubmit = e => {
-        e.preventDefault()
     }
 
     checkErrors = e => {
@@ -117,11 +109,6 @@ class MainForm extends React.Component {
                 break;
 
             case 2:
-                const emailRegex = new RegExp(
-                    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-                );
-
-                const mobileRegex = new RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/gm);
 
                 if (!emailRegex.test(email)) {
                     errors.email = 'Invalid email address'
@@ -141,7 +128,7 @@ class MainForm extends React.Component {
                 break;
 
             case 3:
-                if (avatar === '/avatar.png') {
+                if (avatar === 'avatar.png') {
                     errors.avatar = 'Required'
                 }
                 break;
@@ -153,6 +140,7 @@ class MainForm extends React.Component {
     }
 
     nextStep = (e) => {
+        e.preventDefault()
 
         const errors = this.checkErrors()
 
@@ -160,8 +148,7 @@ class MainForm extends React.Component {
             this.setState({
                 errors
             })
-        }
-        else {
+        } else {
             this.setState((state) => ({
                 step: state.step + 1,
                 errors: {}
@@ -176,52 +163,53 @@ class MainForm extends React.Component {
     }
 
     render() {
+        const { step, errors, values } = this.state
         return (
             <div className='main-block'>
                 <BounceInDown>
-                    <StepsBlock step={this.state.step} />
+                    <StepsBlock step={step} />
                 </BounceInDown>
                 <form className="form-default">
-                    {this.state.step === 1 ? (
+                    {step === 1 && (
                         <ZoomIn>
                             <Basic
-                                values={this.state.values}
+                                values={values}
                                 onChange={this.onChange}
-                                errors={this.state.errors}
+                                errors={errors}
                             />
                         </ZoomIn>
-                    ) : null}
-                    {this.state.step === 2 ? (
+                    )}
+                    {step === 2 && (
                         <ZoomIn>
                             <Contacts
-                                values={this.state.values}
+                                values={values}
                                 onChange={this.onChange}
-                                errors={this.state.errors}
+                                errors={errors}
                             />
                         </ZoomIn>
-                    ) : null}
-                    {this.state.step === 3 ? (
+                    )}
+                    {step === 3 && (
                         <ZoomIn>
                             <Avatar
                                 title='Avatar: '
                                 id='avatar'
                                 value={this.state.values.avatar}
                                 name='avatar'
-                                onChange={this.onChangeAvatar}
-                                errors={this.state.errors}
+                                onChange={this.onChange}
+                                errors={errors}
                             />
                         </ZoomIn>
-                    ) : null}
+                    )}
                 </form>
-                {this.state.step === 4 ? (
+                {step === 4 && (
                     <ZoomIn>
                         <Finish
-                            values={this.state.values}
+                            values={values}
                         />
                     </ZoomIn>
-                ) : null}
+                )}
                 <BounceInUp>
-                    <StepsButton resetForm={this.resetForm} prevStep={this.prevStep} nextStep={this.nextStep} step={this.state.step} />
+                    <StepsButton resetForm={this.resetForm} prevStep={this.prevStep} nextStep={this.nextStep} step={step} />
                 </BounceInUp>
             </div>
         );
