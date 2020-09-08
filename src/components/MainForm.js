@@ -47,9 +47,11 @@ class MainForm extends React.Component {
   }
 
   onChange = (e) => {
-    this.state.values[e.target.name] = e.target.value
     this.setState({
-      values: this.state.values,
+      values: {
+        ...this.state.values,
+        [e.target.name]: e.target.value,
+      },
     })
   }
 
