@@ -5,7 +5,7 @@ const StepsButton = (props) => {
   return (
     <div className="steps-block button-steps">
       {step < 4 ? (
-        <React.StrictMode>
+        <>
           <button
             className="btn btn-default"
             type="button"
@@ -21,9 +21,9 @@ const StepsButton = (props) => {
           >
             Next
           </button>
-        </React.StrictMode>
+        </>
       ) : (
-        <React.StrictMode>
+        <>
           <button
             className="btn btn-default btn-next"
             type="button"
@@ -31,7 +31,7 @@ const StepsButton = (props) => {
           >
             Reset
           </button>
-        </React.StrictMode>
+        </>
       )}
     </div>
   )

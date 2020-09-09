@@ -35,7 +35,7 @@ export default class Contacts extends React.Component {
     const { onChange, errors } = this.props
 
     return (
-      <React.StrictMode>
+      <>
         <Field
           id="email"
           title="Email: "
@@ -75,7 +75,7 @@ export default class Contacts extends React.Component {
           error={errors.city}
         />
         <div className="void-block"></div>
-      </React.StrictMode>
+      </>
     )
   }
 }

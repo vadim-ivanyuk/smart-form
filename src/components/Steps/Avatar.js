@@ -1,8 +1,9 @@
 import React from 'react'
 import Field from '../Fields/Field'
+import defaultAvatar from '../../images/avatar.png'
 
 const Avatar = (props) => {
-  const { title, id, name, onChange, value, errors } = props
+  const { onChange, values, errors } = props
 
   const onChangeAvatar = (e) => {
     const reader = new FileReader()
@@ -19,17 +20,17 @@ const Avatar = (props) => {
   }
 
   return (
-    <React.StrictMode>
-      <img className="avatar-img" src={value} alt={name} />
+    <>
+      <img className="avatar-img" src={values.avatar || defaultAvatar} alt="" />
       <Field
-        id={id}
-        title={title}
+        id="avatar"
+        title="Avatar: "
         type="file"
         onChange={onChangeAvatar}
-        name={name}
+        name="avatar"
         error={errors.avatar}
       />
-    </React.StrictMode>
+    </>
   )
 }
 

@@ -17,16 +17,12 @@ const Finish = (props) => {
     email,
     city,
   } = props.values
-  const resultCountry = countries.find((item) => item.id === +country) || {}
+  const currentCountry = countries.find((c) => c.id === Number(country))
 
   return (
     <div className="main-finish-block">
       <div>
-        <img
-          className="main-finish-block--img"
-          src={avatar}
-          alt={firstName + ' ' + secondName}
-        />
+        <img className="main-finish-block--img" src={avatar} alt="" />
       </div>
       <div>
         <p className="main-finish-block--titleP">
@@ -42,7 +38,7 @@ const Finish = (props) => {
         </p>
         <p>
           <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" /> -{' '}
-          {resultCountry.name}, {city}{' '}
+          {currentCountry?.name}, {city}{' '}
         </p>
       </div>
     </div>

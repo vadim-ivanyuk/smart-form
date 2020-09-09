@@ -17,7 +17,7 @@ class Basic extends React.Component {
     } = this.props.values
     const { onChange, errors } = this.props
     return (
-      <React.StrictMode>
+      <>
         <Field
           id="firstName"
           title="First Name: "
@@ -85,7 +85,7 @@ class Basic extends React.Component {
             <label htmlFor="female">Female</label>
           </div>
         </div>
-      </React.StrictMode>
+      </>
     )
   }
 }

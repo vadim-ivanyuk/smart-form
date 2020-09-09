@@ -1,5 +1,5 @@
 import React from 'react'
-import StepsBlock from './StepsHeader/StepsHeader'
+import StepsBlock from './StatusBlock/StatusBlock'
 import Basic from './Steps/Basic'
 import Contacts from './Steps/Contacts'
 import Avatar from './Steps/Avatar'
@@ -28,7 +28,7 @@ class MainForm extends React.Component {
   constructor() {
     super()
 
-    this.state = {
+    this.initialState = {
       values: {
         firstName: '',
         secondName: '',
@@ -39,11 +39,13 @@ class MainForm extends React.Component {
         mobile: '',
         country: '1',
         city: '',
-        avatar: 'avatar.png',
+        avatar: null,
       },
       errors: {},
       step: 1,
     }
+
+    this.state = this.initialState
   }
 
   onChange = (e) => {
@@ -56,86 +58,50 @@ class MainForm extends React.Component {
   }
 
   resetForm = (e) => {
-    this.setState({
-      values: {
-        firstName: '',
-        secondName: '',
-        password: '',
-        repeatPassword: '',
-        gender: 'male',
-        email: '',
-        mobile: '',
-        country: '1',
-        city: '',
-        avatar: 'avatar.png',
-      },
-      step: 1,
-      errors: {
-        firstName: '',
-        secondName: '',
-        password: '',
-        repeatPassword: '',
-        age: '',
-        email: '',
-        mobile: '',
-        location: '',
-      },
-    })
+    this.setState(this.initialState)
   }
 
   checkErrors = (e) => {
-    const {
-      firstName,
-      secondName,
-      password,
-      repeatPassword,
-      email,
-      mobile,
-      country,
-      avatar,
-      city,
-    } = this.state.values
-
-    const { step } = this.state
+    const { step, values } = this.state
 
     const errors = {}
 
     switch (step) {
       case 1:
-        if (firstName.length < 5) {
+        if (values.firstName.length < 5) {
           errors.firstName = 'Must be 5 characters or more'
         }
-        if (secondName.length < 5) {
+        if (values.secondName.length < 5) {
           errors.secondName = 'Must be 5 characters or more'
         }
-        if (password.length < 8) {
+        if (values.password.length < 8) {
           errors.password = 'Must be 8 characters or more'
         }
-        if (repeatPassword !== password) {
+        if (values.repeatPassword !== values.password) {
           errors.repeatPassword = 'Must be equal passwords'
         }
         break
 
       case 2:
-        if (!emailRegex.test(email)) {
+        if (!emailRegex.test(values.email)) {
           errors.email = 'Invalid email address'
         }
 
-        if (!mobileRegex.test(mobile)) {
+        if (!mobileRegex.test(values.mobile)) {
           errors.mobile = 'Invalid mobile number'
         }
 
-        if (!country || country === 0) {
+        if (!values.country || values.country === 0) {
           errors.country = 'Required'
         }
 
-        if (!city || city === 0) {
+        if (!values.city || values.city === 0) {
           errors.city = 'Required'
         }
         break
 
       case 3:
-        if (avatar === 'avatar.png') {
+        if (values.avatar === 'avatar.png') {
           errors.avatar = 'Required'
         }
         break
@@ -194,10 +160,7 @@ class MainForm extends React.Component {
           {step === 3 && (
             <ZoomIn>
               <Avatar
-                title="Avatar: "
-                id="avatar"
-                value={this.state.values.avatar}
-                name="avatar"
+                values={this.state.values}
                 onChange={this.onChange}
                 errors={errors}
               />
