@@ -24,7 +24,7 @@ const Avatar = (props) => {
       <img className="avatar-img" src={values.avatar || defaultAvatar} alt="" />
       <Field
         id="avatar"
-        title="Avatar: "
+        label="Avatar: "
         type="file"
         onChange={onChangeAvatar}
         name="avatar"

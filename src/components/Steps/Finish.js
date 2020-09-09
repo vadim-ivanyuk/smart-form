@@ -38,7 +38,7 @@ const Finish = (props) => {
         </p>
         <p>
           <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" /> -{' '}
-          {currentCountry?.name}, {city}{' '}
+          {currentCountry?.name}, {city === '1' ? 'Chernivtsi' : city}{' '}
         </p>
       </div>
     </div>

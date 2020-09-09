@@ -10,24 +10,28 @@ export default class Contacts extends React.Component {
     this.state = {}
   }
 
-  getOptions = (items) => {
-    return items.map((item, index) => {
-      return (
-        <option key={index} value={item.id}>
-          {item.name}
-        </option>
-      )
-    })
-  }
+  getOptions = (items) =>
+    items.map((item, index) => (
+      <option key={index} value={item.id}>
+        {item.name}
+      </option>
+    ))
 
   getCitiesOptions = (cities) => {
-    return cities
-      .filter((item, index) => item.id == this.props.values.country)
-      .map((item, index) => (
-        <option key={index} value={item.name}>
-          {item.name}
-        </option>
-      ))
+    const { country } = this.props.values
+    let citiesForCurrentCountry = []
+
+    Object.values(cities).forEach((city) => {
+      if (city.country === Number(country)) {
+        citiesForCurrentCountry.push(city.name)
+      }
+    })
+
+    return citiesForCurrentCountry.map((item) => (
+      <option key={item} value={item}>
+        {item}
+      </option>
+    ))
   }
 
   render() {
@@ -38,7 +42,7 @@ export default class Contacts extends React.Component {
       <>
         <Field
           id="email"
-          title="Email: "
+          label="Email: "
           name="email"
           type="text"
           placeholder="Enter email"
@@ -48,7 +52,7 @@ export default class Contacts extends React.Component {
         />
         <Field
           id="mobile"
-          title="Mobile: "
+          label="Mobile: "
           name="mobile"
           type="text"
           placeholder="Enter mobile"
@@ -58,7 +62,7 @@ export default class Contacts extends React.Component {
         />
         <SelectField
           id="country"
-          title="Country: "
+          label="Country: "
           value={country}
           name="country"
           onChange={onChange}
@@ -67,7 +71,7 @@ export default class Contacts extends React.Component {
         />
         <SelectField
           id="city"
-          title="City: "
+          label="City: "
           value={city}
           name="city"
           onChange={onChange}

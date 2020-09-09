@@ -1,11 +1,11 @@
 import React from 'react'
 
 const Field = (props) => {
-    const { id, name, title, type, placeholder, value, onChange, error } = props
+    const { id, name, label, type, placeholder, value, onChange, error } = props
 
     return (
         <div className={type !== 'file' ? 'form-group' : 'avatar-title-block'}>
-            <label className="form-label-title" htmlFor={id}>{title}</label>
+            <label className="form-label-title" htmlFor={id}>{label}</label>
             <input
                 id={id}
                 type={type}

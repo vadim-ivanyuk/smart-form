@@ -20,7 +20,7 @@ class Basic extends React.Component {
       <>
         <Field
           id="firstName"
-          title="First Name: "
+          label="First Name: "
           name="firstName"
           type="text"
           placeholder="Enter first name"
@@ -30,7 +30,7 @@ class Basic extends React.Component {
         />
         <Field
           id="secondName"
-          title="Second Name: "
+          label="Second Name: "
           name="secondName"
           type="text"
           placeholder="Enter second name"
@@ -40,7 +40,7 @@ class Basic extends React.Component {
         />
         <Field
           id="password"
-          title="Password: "
+          label="Password: "
           name="password"
           type="password"
           placeholder="Enter password"
@@ -50,7 +50,7 @@ class Basic extends React.Component {
         />
         <Field
           id="repeatPassword"
-          title="Repeat password: "
+          label="Repeat password: "
           name="repeatPassword"
           type="password"
           placeholder="Repeat password"

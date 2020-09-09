@@ -38,7 +38,7 @@ class MainForm extends React.Component {
         email: '',
         mobile: '',
         country: '1',
-        city: '',
+        city: '1',
         avatar: null,
       },
       errors: {},
